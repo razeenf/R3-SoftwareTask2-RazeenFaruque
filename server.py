@@ -11,15 +11,15 @@ print('Connection address:', address)
 def process(key):
     match key:
         case 'w':
-            return ("[f" + str(speedVal) + "]") * 4
+            return ('[f' + str(speedVal) + ']') * 4
         case 'a':
-            return ("[r" + str(speedVal) + "]") * 2 + ("[f" + str(speedVal) + "]") * 2
+            return ('[r' + str(speedVal) + ']') * 2 + ('[f' + str(speedVal) + ']') * 2
         case 's':
-            return ("[r" + str(speedVal) + "]") * 4
+            return ('[r' + str(speedVal) + ']') * 4
         case 'd':
-            return ("[f" + str(speedVal) + "]") * 2 + ("[r" + str(speedVal) + "]") * 2
+            return ('[f' + str(speedVal) + ']') * 2 + ('[r' + str(speedVal) + ']') * 2
         case _:
-            return "Error"
+            return 'Error'
 
 
 while 1:
@@ -32,7 +32,7 @@ while 1:
 
     if packet.isnumeric():
         speedVal = int(packet)*51
-        print('Rover speed set to ', speedVal)
+        print('Rover speed set to', speedVal)
 
     if packet.isalpha():
         print(process(packet))
