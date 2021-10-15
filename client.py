@@ -6,26 +6,32 @@ s.connect(('127.0.0.1', 5005))
 
 validKeys = ['w', 'a', 's', 'd']
 
+while 1:
+    speedVal = input('enter rover speed (0-5): ')
+    if speedVal.isnumeric() and 0 <= int(speedVal) <= 5:
+        s.send(bytes(format(speedVal), encoding="utf-8"))
+        print("echo:", s.recv(1024).decode("utf-8"))
+        break
+
 
 def on_press(key):
     try:
-        keyChar = format(key.char)
         for i in range(4):
-            if keyChar == validKeys[i]:
-                s.send(bytes(keyChar, encoding="utf-8"))
+            if format(key.char) == validKeys[i]:
+                s.send(bytes(format(key.char), encoding="utf-8"))
                 data = s.recv(1024)  # 1024 = buffer size
-                print("received data:", data.decode("utf-8"))
+                print("echo:", data.decode("utf-8"))
     except AttributeError:
-        print('not a valid input')
+        if key == keyboard.Key.esc:
+            print('Connection Closed.')
+            s.close()
+            listener.stop()
 
 
 with keyboard.Listener(
         on_press=on_press) as listener:
     listener.join()
 
-# ...or, in a non-blocking fashion:
 listener = keyboard.Listener(
     on_press=on_press)
 listener.start()
-
-s.close()

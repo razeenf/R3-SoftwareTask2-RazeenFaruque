@@ -9,7 +9,6 @@ print('Connection address:', address)
 
 
 def process(key):
-    speedVal = 1 * 51
     match key:
         case 'w':
             return ("[f" + str(speedVal) + "]") * 4
@@ -27,7 +26,16 @@ while 1:
     data = conn.recv(20)  # Normally 1024 buffer size, but we want fast response
     if not data:
         break
-    print('Obtained:', data.decode("utf-8"))
-    conn.send(bytes(process(data.decode("utf-8")), encoding="utf-8"))  # echo
+
+    packet = data.decode('utf-8')
+    conn.send(bytes(packet, encoding='utf-8'))  # echo back input received so client can see what server received
+
+    if packet.isnumeric():
+        speedVal = int(packet)*51
+        print('Rover speed set to ', speedVal)
+
+    if packet.isalpha():
+        print(process(packet))
 
 conn.close()
+print('Connection Closed.')
