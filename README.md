@@ -9,7 +9,7 @@ and the speed will automatically be changed. The esc key is used to disconnect
 from the server and end the program. Any keys other than WASD, 0-5 
 and esc will be ignored and have no effect on the program. 
 
-![demo!](demo.gif "demo")
+![demo](demo.mp4)
 
 The way this works is that  input.py (client) uses pynput to track 
 which key the user presses and if a valid key is pressed then that key char
