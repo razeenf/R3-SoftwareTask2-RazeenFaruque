@@ -26,15 +26,12 @@ while 1:
     data = conn.recv(20)  # Normally 1024 buffer size, but we want fast response
     if not data:
         break
-
     packet = data.decode('utf-8')
     conn.send(bytes(packet, encoding='utf-8'))  # echo back input received so client can see what server received
-
     if packet.isnumeric():
+        print('Rover speed set to', packet)
         speedVal = int(packet)*51
-        print('Rover speed set to', speedVal)
-
-    if packet.isalpha():
+    elif packet.isalpha():
         print(process(packet))
 
 conn.close()
