@@ -8,7 +8,7 @@ conn, address = s.accept()
 print('Connection address:', address)
 
 
-def process(key):
+def process(key):   # switch statement used to pick output based on key value
     match key:
         case 'w':
             return ('[f' + str(speedVal) + ']') * 4
@@ -28,10 +28,10 @@ while 1:
         break
     packet = data.decode('utf-8')
     conn.send(bytes(packet, encoding='utf-8'))  # echo back input received so client can see what server received
-    if packet.isnumeric():
+    if packet.isnumeric():  # check to see if key is number so speed can be set
         print('Rover speed set to', packet)
         speedVal = int(packet)*51
-    elif packet.isalpha():
+    elif packet.isalpha():  # check to see if key is character so an output can be picked
         print(process(packet))
 
 conn.close()

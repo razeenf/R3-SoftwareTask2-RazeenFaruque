@@ -27,3 +27,7 @@ An AttributeError try catch is in place in case a non char key is pressed,
 in such case nothing happens unless it was the esc key that was pressed. 
 If esc is pressed the client and server will be disconnected, the pynput keyboard listener 
 will stop and the program will end. 
+
+![output.png](ouput.png)
+
+Everything works as expected and there are no known bugs.
